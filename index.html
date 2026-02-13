@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AB Test Calculator | Abrantes</title>
+    <meta name="description" content="Free online A/B test significance calculator. Enter your experiment data and instantly determine statistical significance using a two-proportion Z-test.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container header-inner">
+            <a href="/" class="logo">AB Test Calculator</a>
+            <nav>
+                <a href="https://abrantes.co" class="nav-link" target="_blank" rel="noopener">Abrantes &rarr;</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>A/B Test Significance Calculator</h1>
+            <p class="hero-subtitle">Enter your experiment data to calculate statistical significance using a two-proportion Z-test. Results update automatically as you type.</p>
+        </div>
+    </section>
+
+    <main class="calculator-section">
+        <div class="container">
+            <div class="experiment-title-card card">
+                <label for="experiment-title" class="input-label">Experiment Title</label>
+                <input type="text" id="experiment-title" class="input" placeholder="e.g. Homepage CTA Button Color Test">
+            </div>
+
+            <div id="variants-container">
+                <div class="variant-card card" data-variant="0">
+                    <div class="variant-header">
+                        <h3 class="variant-title">Original</h3>
+                    </div>
+                    <div class="inputs-grid">
+                        <div class="input-group">
+                            <label class="input-label" for="participants-0">Participants</label>
+                            <input type="number" id="participants-0" class="input" min="0" placeholder="0">
+                        </div>
+                        <div class="input-group">
+                            <label class="input-label" for="conversions-0">Conversions</label>
+                            <input type="number" id="conversions-0" class="input" min="0" placeholder="0">
+                        </div>
+                    </div>
+                    <div class="results-area" id="results-0"></div>
+                </div>
+
+                <div class="variant-card card" data-variant="1">
+                    <div class="variant-header">
+                        <h3 class="variant-title">Variant 1</h3>
+                    </div>
+                    <div class="inputs-grid">
+                        <div class="input-group">
+                            <label class="input-label" for="participants-1">Participants</label>
+                            <input type="number" id="participants-1" class="input" min="0" placeholder="0">
+                        </div>
+                        <div class="input-group">
+                            <label class="input-label" for="conversions-1">Conversions</label>
+                            <input type="number" id="conversions-1" class="input" min="0" placeholder="0">
+                        </div>
+                    </div>
+                    <div class="results-area" id="results-1"></div>
+                </div>
+            </div>
+
+            <div class="actions">
+                <button type="button" id="add-variant-btn" class="btn btn-secondary">+ Add Variant</button>
+                <button type="button" id="share-btn" class="btn btn-primary">Share Link</button>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 Abrantes. Free A/B test significance calculator.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
