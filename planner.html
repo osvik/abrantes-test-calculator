@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AB Test Planner | Abrantes</title>
+    <meta name="description" content="Free A/B test planner. Estimate how many days, participants, and conversions you need before running your experiment.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="planner.css">
+    <link rel="canonical" href="https://osvik.github.io/abrantes-test-calculator/planner.html">
+</head>
+<body>
+    <header class="header">
+        <div class="container header-inner">
+            <a href="./" class="logo">Abrantes Calculator</a>
+            <nav>
+                <a href="https://osvik.github.io/abrantes/" class="nav-link" target="_blank">Abrantes &rarr;</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>A/B Test Planner</h1>
+            <p class="hero-subtitle">Estimate how many days, participants, and conversions you need to reach statistical significance before running your experiment.</p>
+        </div>
+    </section>
+
+    <main class="calculator-section">
+        <div class="container">
+            <div class="card planner-inputs-card">
+                <div class="inputs-grid inputs-grid-3">
+                    <div class="input-group">
+                        <label class="input-label" for="daily-participants">Avg. Daily Participants</label>
+                        <input type="number" id="daily-participants" class="input" min="1" placeholder="e.g. 1000">
+                    </div>
+                    <div class="input-group">
+                        <label class="input-label" for="daily-conversions">Avg. Daily Conversions</label>
+                        <input type="number" id="daily-conversions" class="input" min="0" placeholder="e.g. 50">
+                    </div>
+                    <div class="input-group">
+                        <label class="input-label" for="num-variants">Planned Variants</label>
+                        <select id="num-variants" class="input">
+                            <option value="1">1 variant</option>
+                            <option value="2">2 variants</option>
+                            <option value="3">3 variants</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card planner-results-card" id="results-card" style="display: none;">
+                <h3 class="variant-title">Estimated Requirements</h3>
+                <div class="results-grid planner-results-grid">
+                    <div class="result-item">
+                        <div class="result-label">Min. Total Participants</div>
+                        <div class="result-value" id="result-participants">—</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Min. Total Conversions</div>
+                        <div class="result-value" id="result-conversions">—</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Min. Days</div>
+                        <div class="result-value" id="result-days">—</div>
+                    </div>
+                </div>
+                <div id="notes-area"></div>
+            </div>
+
+            <div class="actions">
+                <a href="./" class="btn btn-secondary">Significance Calculator</a>
+                <button type="button" id="share-btn" class="btn btn-primary">Share Link</button>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; Abrantes. Free A/B test significance calculator. Licensed under <a href="https://choosealicense.com/licenses/agpl-3.0/" target="_blank" rel="noopener">GNU Affero General Public License v3.0</a></p>
+            <p>Maintained by <a href="https://github.com/osvik" target="_blank">osvik</a>. <a href="https://github.com/osvik/abrantes-test-calculator" target="_blank">[Source code]</a></p>
+        </div>
+    </footer>
+
+    <script src="planner.js"></script>
+</body>
+</html>

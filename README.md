@@ -1,10 +1,12 @@
-# A/B Test Significance Calculator
+# Abrantes A/B Testing Tools
 
-A free, open-source A/B test calculator that tells you whether your experiment results are statistically significant.
+Free, open-source tools for planning and evaluating A/B test experiments.
 
-**Use it now:** [osvik.github.io/abrantes-test-calculator](https://osvik.github.io/abrantes-test-calculator/)
+**Use them now:** [osvik.github.io/abrantes-test-calculator](https://osvik.github.io/abrantes-test-calculator/)
 
-## What it does
+---
+
+## A/B Test Significance Calculator
 
 Enter the number of participants and conversions for your original and variant(s). The calculator instantly shows:
 
@@ -15,20 +17,20 @@ Enter the number of participants and conversions for your original and variant(s
 
 Results update in real time as you type. No server, no signup, no tracking.
 
-## Who is this for
+### Who is this for
 
 - **Marketing teams** running landing page or email experiments
 - **Web designers and developers** testing layout, copy, or UX changes
 - **Product managers** evaluating feature variations
 - **Anyone** who needs a quick, reliable significance check
 
-## How to read the results
+### How to read the results
 
 A result is marked **Significant** when the confidence level reaches 95% or higher (p-value < 0.05). This means there is less than a 5% probability that the difference between your variants happened by chance.
 
 If the result says **Not Significant**, you either need more data or the difference between variants is too small to be conclusive.
 
-### Sample size matters
+#### Sample size matters
 
 Small sample sizes produce unreliable results. As a general rule:
 
@@ -36,14 +38,14 @@ Small sample sizes produce unreliable results. As a general rule:
 - For subtle differences (1-2% improvement), you typically need 10,000+ participants per variant
 - Always let your experiment run to completion before making decisions
 
-## Features
+### Features
 
 - Compare up to 4 variants (original + 3 variations)
 - Share experiments via URL — click "Share Link" to copy a URL that restores all your data
 - Works entirely in the browser — no data is sent to any server
 - Responsive design for desktop and mobile
 
-## Statistical method
+### Statistical method
 
 The calculator uses a **two-proportion Z-test** (two-tailed):
 
@@ -57,13 +59,47 @@ Where `p1`/`p2` are conversion rates and `n1`/`n2` are participant counts. The n
 
 The significance threshold is **p < 0.05** (95% confidence).
 
+---
+
+## A/B Test Planner
+
+Estimate how many days, participants, and conversions you need to reach statistical significance **before** you start your experiment.
+
+**Use it:** [osvik.github.io/abrantes-test-calculator/planner.html](https://osvik.github.io/abrantes-test-calculator/planner.html)
+
+### What it does
+
+Enter your average daily traffic and conversions, and the number of variants you plan to test. The planner calculates:
+
+- **Minimum total participants** needed across all groups
+- **Minimum total conversions** expected during the experiment
+- **Minimum number of days** the experiment should run
+
+It also provides contextual notes about your experiment — warnings for very low or high conversion rates, long durations, and explanations of the statistical assumptions.
+
+### Who is this for
+
+- **Marketing teams** planning experiments and setting expectations with stakeholders
+- **Product managers** deciding whether an A/B test is feasible given current traffic
+- **Anyone** who wants to know how long an experiment will take before committing resources
+
+### Statistical assumptions
+
+- **7% minimum detectable effect** (relative change) — conservative end of the typical 7-10% range
+- **95% confidence level** (alpha = 0.05, two-tailed)
+- **80% statistical power** — 80% chance of detecting the effect if it truly exists
+- Sample size calculated using the two-proportion Z-test power formula
+
+---
+
 ## Tech stack
 
-Static site — three files, no dependencies, no build step:
+Static site — no dependencies, no build step:
 
-- `index.html` — page structure
-- `style.css` — styling
-- `script.js` — statistics and interactivity
+- `index.html` / `script.js` — Significance Calculator
+- `planner.html` / `planner.js` — Test Planner
+- `style.css` — shared styling
+- `planner.css` — planner-specific styling
 
 Hosted on GitHub Pages.
 

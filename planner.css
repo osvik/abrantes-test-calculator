@@ -1,0 +1,56 @@
+/* Planner-specific styles */
+
+.inputs-grid-3 {
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.planner-inputs-card {
+    margin-bottom: 1rem;
+}
+
+.planner-results-card .variant-title {
+    margin-bottom: 1rem;
+}
+
+.planner-results-grid {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.planner-notes {
+    margin-top: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.planner-note {
+    padding: 0.75rem 1rem;
+    background: #f0f9ff;
+    border: 1px solid #bae6fd;
+    border-radius: var(--radius);
+    font-size: 0.85rem;
+    color: #0c4a6e;
+    line-height: 1.5;
+}
+
+.planner-note-warning {
+    background: #fef3c7;
+    border-color: #fde68a;
+    color: #92400e;
+}
+
+@media (max-width: 768px) {
+    .inputs-grid-3 {
+        grid-template-columns: 1fr;
+    }
+
+    .planner-results-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .planner-results-grid {
+        grid-template-columns: 1fr;
+    }
+}
