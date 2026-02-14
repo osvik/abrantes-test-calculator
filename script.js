@@ -56,11 +56,14 @@
         var pValue = 2 * (1 - normalCDF(Math.abs(z)));
         var confidence = (1 - pValue) * 100;
 
+        var weightedDiff = Math.abs(p2 - p1) * Math.min(n1, n2);
+
         return {
             zScore: z,
             pValue: pValue,
             confidence: confidence,
-            significant: pValue < 0.05
+            significant: pValue < 0.05,
+            lowData: pValue < 0.05 && weightedDiff <= 20
         };
     }
 
@@ -204,6 +207,15 @@
         }
 
         html += '</div>';
+
+        if (stats && stats.lowData) {
+            html +=
+                '<div class="low-data-warning">' +
+                    '<strong>Low data warning!</strong> ' +
+                    ' This is a significant result based on your thresholds, but the actual weighted difference is 20 conversions or less &mdash; please be careful interpreting these results &mdash; gathering more data is advised.' +
+                '</div>';
+        }
+
         container.innerHTML = html;
     }
 
