@@ -75,6 +75,7 @@
     var resultDays = document.getElementById('result-days');
     var notesArea = document.getElementById('notes-area');
     var shareBtn = document.getElementById('share-btn');
+    var experimentTitleInput = document.getElementById('experiment-title');
 
     // --- Constants ---
 
@@ -174,10 +175,12 @@
 
     function generateShareURL() {
         var params = new URLSearchParams();
+        var title = experimentTitleInput.value.trim();
         var dp = dailyParticipantsInput.value.trim();
         var dc = dailyConversionsInput.value.trim();
         var v = numVariantsSelect.value;
 
+        if (title) params.set('t', title);
         if (dp) params.set('dp', dp);
         if (dc) params.set('dc', dc);
         if (v !== '1') params.set('v', v);
@@ -232,10 +235,12 @@
         var params = new URLSearchParams(window.location.search);
         if (params.toString() === '') return;
 
+        var title = params.get('t');
         var dp = params.get('dp');
         var dc = params.get('dc');
         var v = params.get('v');
 
+        if (title !== null) experimentTitleInput.value = title;
         if (dp !== null) dailyParticipantsInput.value = dp;
         if (dc !== null) dailyConversionsInput.value = dc;
         if (v !== null) numVariantsSelect.value = v;
