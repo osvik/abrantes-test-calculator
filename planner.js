@@ -76,12 +76,18 @@
     var notesArea = document.getElementById('notes-area');
     var shareBtn = document.getElementById('share-btn');
     var experimentTitleInput = document.getElementById('experiment-title');
+    var confidenceToggle = document.getElementById('confidence-toggle');
+    var toggleOptions = confidenceToggle.querySelectorAll('.toggle-option');
 
     // --- Constants ---
 
     var MDE_RELATIVE = 0.07; // 7% minimum detectable effect
-    var ALPHA = 0.05;        // 95% confidence
     var POWER = 0.80;        // 80% power
+
+    function getAlpha() {
+        var active = confidenceToggle.querySelector('.toggle-option.active');
+        return parseFloat(active.getAttribute('data-value'));
+    }
 
     // --- Event listeners ---
 
@@ -89,6 +95,16 @@
     dailyConversionsInput.addEventListener('input', function () { clampConversions(); updateResults(); });
     numVariantsSelect.addEventListener('change', updateResults);
     shareBtn.addEventListener('click', shareLink);
+
+    for (var i = 0; i < toggleOptions.length; i++) {
+        toggleOptions[i].addEventListener('click', function () {
+            for (var j = 0; j < toggleOptions.length; j++) {
+                toggleOptions[j].classList.remove('active');
+            }
+            this.classList.add('active');
+            updateResults();
+        });
+    }
 
     // --- Functions ---
 
@@ -124,8 +140,11 @@
             return;
         }
 
+        var alpha = getAlpha();
+        var confidencePercent = Math.round((1 - alpha) * 100);
+
         var baseRate = dc / dp;
-        var nPerGroup = calculateSampleSize(baseRate, MDE_RELATIVE, ALPHA, POWER);
+        var nPerGroup = calculateSampleSize(baseRate, MDE_RELATIVE, alpha, POWER);
 
         if (!isFinite(nPerGroup)) {
             resultsCard.style.display = 'none';
@@ -158,7 +177,7 @@
             notes.push({ text: '<strong>Experiment duration: ' + minDays + ' days.</strong> This is a long experiment. Make sure external factors (seasonality, campaigns) won\'t skew results over this period.', warning: true });
         }
 
-        notes.push({ text: 'This estimate assumes a <strong>7% minimum detectable effect</strong> (relative change), which is at the conservative end of the typical 7&ndash;10% range for conversion rate optimization.', warning: false });
+        notes.push({ text: 'This estimate uses a <strong>' + confidencePercent + '% confidence level</strong> and a <strong>7% minimum detectable effect</strong> (relative change), which is at the conservative end of the typical 7&ndash;10% range for conversion rate optimization.', warning: false });
         notes.push({ text: '<strong>80% statistical power</strong> means there is an 80% chance of detecting the effect if it truly exists. The remaining 20% is the risk of a false negative.', warning: false });
 
         var notesHTML = '<div class="planner-notes">';
@@ -184,6 +203,8 @@
         if (dp) params.set('dp', dp);
         if (dc) params.set('dc', dc);
         if (v !== '1') params.set('v', v);
+        var alpha = getAlpha();
+        if (alpha !== 0.05) params.set('cl', Math.round((1 - alpha) * 100));
 
         var query = params.toString();
         return window.location.origin + window.location.pathname + (query ? '?' + query : '');
@@ -239,11 +260,20 @@
         var dp = params.get('dp');
         var dc = params.get('dc');
         var v = params.get('v');
+        var cl = params.get('cl');
 
         if (title !== null) experimentTitleInput.value = title;
         if (dp !== null) dailyParticipantsInput.value = dp;
         if (dc !== null) dailyConversionsInput.value = dc;
         if (v !== null) numVariantsSelect.value = v;
+        if (cl === '90') {
+            for (var i = 0; i < toggleOptions.length; i++) {
+                toggleOptions[i].classList.remove('active');
+                if (toggleOptions[i].getAttribute('data-value') === '0.10') {
+                    toggleOptions[i].classList.add('active');
+                }
+            }
+        }
 
         updateResults();
     }

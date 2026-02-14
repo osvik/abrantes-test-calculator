@@ -32,8 +32,19 @@
     <main class="calculator-section">
         <div class="container">
             <div class="experiment-title-card card">
-                <label for="experiment-title" class="input-label">Experiment Title</label>
-                <input type="text" id="experiment-title" class="input" placeholder="e.g. Homepage CTA Button Color Test">
+                <div class="title-row">
+                    <div class="title-field">
+                        <label for="experiment-title" class="input-label">Experiment Title</label>
+                        <input type="text" id="experiment-title" class="input" placeholder="e.g. Homepage CTA Button Color Test">
+                    </div>
+                    <div class="confidence-toggle-group">
+                        <span class="input-label">Confidence Level</span>
+                        <div class="confidence-toggle" id="confidence-toggle">
+                            <button type="button" class="toggle-option" data-value="0.10">90%</button>
+                            <button type="button" class="toggle-option active" data-value="0.05">95%</button>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <div id="variants-container">

@@ -34,7 +34,7 @@
         return ((variantRate - originalRate) / originalRate) * 100;
     }
 
-    function calculateSignificance(origParticipants, origConversions, varParticipants, varConversions) {
+    function calculateSignificance(origParticipants, origConversions, varParticipants, varConversions, alpha) {
         var p1 = conversionRate(origConversions, origParticipants);
         var p2 = conversionRate(varConversions, varParticipants);
         var n1 = origParticipants;
@@ -62,8 +62,8 @@
             zScore: z,
             pValue: pValue,
             confidence: confidence,
-            significant: pValue < 0.05,
-            lowData: pValue < 0.05 && weightedDiff <= 20
+            significant: pValue < alpha,
+            lowData: pValue < alpha && weightedDiff <= 20
         };
     }
 
@@ -73,15 +73,32 @@
     var addVariantBtn = document.getElementById('add-variant-btn');
     var shareBtn = document.getElementById('share-btn');
     var experimentTitleInput = document.getElementById('experiment-title');
+    var confidenceToggle = document.getElementById('confidence-toggle');
+    var toggleOptions = confidenceToggle.querySelectorAll('.toggle-option');
 
     var variantCount = 2; // starts with Original (0) + Variant 1 (1)
     var MAX_VARIANTS = 4; // indices 0-3
+
+    function getAlpha() {
+        var active = confidenceToggle.querySelector('.toggle-option.active');
+        return parseFloat(active.getAttribute('data-value'));
+    }
 
     // --- Event listeners ---
 
     addVariantBtn.addEventListener('click', addVariant);
     shareBtn.addEventListener('click', shareLink);
     experimentTitleInput.addEventListener('input', updateResults);
+
+    for (var ti = 0; ti < toggleOptions.length; ti++) {
+        toggleOptions[ti].addEventListener('click', function () {
+            for (var tj = 0; tj < toggleOptions.length; tj++) {
+                toggleOptions[tj].classList.remove('active');
+            }
+            this.classList.add('active');
+            updateResults();
+        });
+    }
 
     // Attach input listeners to initial cards
     attachInputListeners(0);
@@ -185,7 +202,8 @@
 
             var stats = calculateSignificance(
                 origData.participants, origData.conversions,
-                varData.participants, varData.conversions
+                varData.participants, varData.conversions,
+                getAlpha()
             );
 
             var badgeClass = stats.significant ? 'badge-significant' : 'badge-not-significant';
@@ -306,6 +324,11 @@
             }
         }
 
+        var alpha = getAlpha();
+        if (alpha !== 0.05) {
+            params.set('cl', Math.round((1 - alpha) * 100));
+        }
+
         return window.location.origin + window.location.pathname + '?' + params.toString();
     }
 
@@ -358,6 +381,16 @@
         var title = params.get('t');
         if (title) {
             experimentTitleInput.value = title;
+        }
+
+        var cl = params.get('cl');
+        if (cl === '90') {
+            for (var ci = 0; ci < toggleOptions.length; ci++) {
+                toggleOptions[ci].classList.remove('active');
+                if (toggleOptions[ci].getAttribute('data-value') === '0.10') {
+                    toggleOptions[ci].classList.add('active');
+                }
+            }
         }
 
         // Determine how many variants exist in params
