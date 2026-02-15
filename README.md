@@ -47,12 +47,12 @@ Small sample sizes produce unreliable results. As a general rule:
 
 ### Statistical method
 
-The calculator uses a **two-proportion Z-test** (two-tailed):
+The calculator uses a **two-proportion Z-test** (one-tailed):
 
 ```
 SE = sqrt[(p1 * (1 - p1) / n1) + (p2 * (1 - p2) / n2)]
 Z  = (p2 - p1) / SE
-p-value = 2 * (1 - normalCDF(|Z|))
+p-value = 1 - normalCDF(|Z|)
 ```
 
 Where `p1`/`p2` are conversion rates and `n1`/`n2` are participant counts. The normal CDF is computed using an Abramowitz & Stegun error function approximation (max error ~1.5e-7).
