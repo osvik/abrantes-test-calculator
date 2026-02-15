@@ -161,6 +161,15 @@ body {
     background: var(--primary-hover);
 }
 
+.toggle-option.toggle-disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.toggle-option.toggle-disabled:hover {
+    background: var(--bg-color);
+}
+
 /* Variant cards */
 .variant-card {
     margin-bottom: 1rem;

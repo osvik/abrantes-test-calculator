@@ -92,6 +92,7 @@
 
     for (var ti = 0; ti < toggleOptions.length; ti++) {
         toggleOptions[ti].addEventListener('click', function () {
+            if (this.disabled) return;
             for (var tj = 0; tj < toggleOptions.length; tj++) {
                 toggleOptions[tj].classList.remove('active');
             }
@@ -273,6 +274,7 @@
         variantCount++;
 
         updateRemoveButtons();
+        enforceConfidenceForMultipleVariants();
 
         if (variantCount >= MAX_VARIANTS) {
             addVariantBtn.disabled = true;
@@ -289,10 +291,30 @@
             variantsContainer.removeChild(card);
             variantCount--;
             updateRemoveButtons();
+            enforceConfidenceForMultipleVariants();
             addVariantBtn.disabled = false;
             updateResults();
         }
     };
+
+    function enforceConfidenceForMultipleVariants() {
+        var hasMultipleVariants = variantCount > 2;
+        var btn90 = confidenceToggle.querySelector('[data-value="0.10"]');
+
+        if (hasMultipleVariants) {
+            // Force 95% confidence
+            for (var i = 0; i < toggleOptions.length; i++) {
+                toggleOptions[i].classList.remove('active');
+            }
+            confidenceToggle.querySelector('[data-value="0.05"]').classList.add('active');
+            btn90.disabled = true;
+            btn90.classList.add('toggle-disabled');
+        } else {
+            btn90.disabled = false;
+            btn90.classList.remove('toggle-disabled');
+        }
+        updateResults();
+    }
 
     function updateRemoveButtons() {
         // Only show remove button on the last card if it's variant 2+
@@ -423,4 +445,5 @@
     // Initialize
     loadFromURL();
     updateRemoveButtons();
+    enforceConfidenceForMultipleVariants();
 })();

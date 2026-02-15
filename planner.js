@@ -93,11 +93,15 @@
 
     dailyParticipantsInput.addEventListener('input', function () { clampConversions(); updateResults(); });
     dailyConversionsInput.addEventListener('input', function () { clampConversions(); updateResults(); });
-    numVariantsSelect.addEventListener('change', updateResults);
+    numVariantsSelect.addEventListener('change', function () {
+        enforceConfidenceForMultipleVariants();
+        updateResults();
+    });
     shareBtn.addEventListener('click', shareLink);
 
     for (var i = 0; i < toggleOptions.length; i++) {
         toggleOptions[i].addEventListener('click', function () {
+            if (this.disabled) return;
             for (var j = 0; j < toggleOptions.length; j++) {
                 toggleOptions[j].classList.remove('active');
             }
@@ -107,6 +111,24 @@
     }
 
     // --- Functions ---
+
+    function enforceConfidenceForMultipleVariants() {
+        var numVariants = parseInt(numVariantsSelect.value, 10);
+        var btn90 = confidenceToggle.querySelector('[data-value="0.10"]');
+
+        if (numVariants > 1) {
+            // Force 95% confidence
+            for (var i = 0; i < toggleOptions.length; i++) {
+                toggleOptions[i].classList.remove('active');
+            }
+            confidenceToggle.querySelector('[data-value="0.05"]').classList.add('active');
+            btn90.disabled = true;
+            btn90.classList.add('toggle-disabled');
+        } else {
+            btn90.disabled = false;
+            btn90.classList.remove('toggle-disabled');
+        }
+    }
 
     function clampConversions() {
         var dp = parseInt(dailyParticipantsInput.value, 10) || 0;
@@ -280,4 +302,5 @@
 
     // Initialize
     loadFromURL();
+    enforceConfidenceForMultipleVariants();
 })();
