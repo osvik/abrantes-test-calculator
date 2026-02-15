@@ -227,18 +227,6 @@
 
         html += '</div>';
 
-        var smallSample =
-            (origData.participants > 0 && (origData.conversions < 5 || (origData.participants - origData.conversions) < 5)) ||
-            (varData.participants > 0 && (varData.conversions < 5 || (varData.participants - varData.conversions) < 5));
-
-        if (smallSample) {
-            html +=
-                '<div class="low-data-warning">' +
-                    '<strong>Small sample warning!</strong> ' +
-                    ' Results can be unreliable when conversions or non-conversions are below 5. Consider collecting more data before deciding.' +
-                '</div>';
-        }
-
         if (stats && stats.lowData) {
             html +=
                 '<div class="low-data-warning">' +
