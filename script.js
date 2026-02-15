@@ -53,7 +53,7 @@
         }
 
         var z = (p2 - p1) / se;
-        var pValue = 1 - normalCDF(Math.abs(z));
+        var pValue = 2 * (1 - normalCDF(Math.abs(z)));
         var confidence = (1 - pValue) * 100;
 
         var weightedDiff = Math.abs(p2 - p1) * Math.min(n1, n2);
