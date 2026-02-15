@@ -86,9 +86,9 @@ It also provides contextual notes about your experiment — warnings for very lo
 ### Statistical assumptions
 
 - **7% minimum detectable effect** (relative change) — conservative end of the typical 7-10% range
-- **90% or 95% confidence level** (toggleable, defaults to 95%)
+- **90% or 95% confidence level** (toggleable, defaults to 95%; multiple variants force 95%)
 - **80% statistical power** — 80% chance of detecting the effect if it truly exists
-- Sample size calculated using the two-proportion Z-test power formula
+- Sample size calculated using the two-proportion Z-test power formula (two-tailed)
 
 ---
 

@@ -55,10 +55,14 @@
         if (p2 > 1) p2 = 1;
         if (p1 === p2) return Infinity;
 
+        var pBar = (p1 + p2) / 2;
         var zAlpha = inverseNormalCDF(1 - alpha / 2); // two-tailed
         var zBeta = inverseNormalCDF(power);
 
-        var numerator = Math.pow(zAlpha + zBeta, 2) * (p1 * (1 - p1) + p2 * (1 - p2));
+        var termAlpha = zAlpha * Math.sqrt(2 * pBar * (1 - pBar));
+        var termBeta = zBeta * Math.sqrt(p1 * (1 - p1) + p2 * (1 - p2));
+
+        var numerator = Math.pow(termAlpha + termBeta, 2);
         var denominator = Math.pow(p2 - p1, 2);
 
         return Math.ceil(numerator / denominator);
