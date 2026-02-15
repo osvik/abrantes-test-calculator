@@ -28,6 +28,8 @@ Results update in real time as you type. No server, no signup, no tracking.
 
 A result is marked **Significant** when the confidence level reaches 95% or higher (p-value < 0.05). This means there is less than a 5% probability that the difference between your variants happened by chance.
 
+For experiments with just one variant, it's also possible to use a 90% confidence level. Although the standard for this type of experiments is 95%, it often it takes a long time to achieve statistical significance.
+
 If the result says **Not Significant**, you either need more data or the difference between variants is too small to be conclusive.
 
 #### Sample size matters
