@@ -10,6 +10,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="planner.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#2563eb">
     <link rel="canonical" href="https://osvik.github.io/abrantes-test-calculator/planner.html">
 </head>
 <body>
@@ -103,5 +105,10 @@
     </footer>
 
     <script src="planner.js"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('service-worker.js');
+        }
+    </script>
 </body>
 </html>

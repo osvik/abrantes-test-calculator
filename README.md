@@ -46,6 +46,7 @@ Small sample sizes produce unreliable results. As a general rule:
 - Share experiments via URL — click "Share Link" to copy a URL that restores all your data
 - Works entirely in the browser — no data is sent to any server
 - Responsive design for desktop and mobile
+- Works offline — a service worker caches all assets so both tools remain fully functional without an internet connection
 
 ### Statistical method
 
@@ -102,6 +103,8 @@ Static site — no dependencies, no build step:
 - `planner.html` / `planner.js` — Test Planner
 - `style.css` — shared styling
 - `planner.css` — planner-specific styling
+- `service-worker.js` — network-first caching for offline support
+- `manifest.json` — web app manifest for installability
 
 Hosted on GitHub Pages.
 
