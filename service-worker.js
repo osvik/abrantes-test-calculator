@@ -1,4 +1,4 @@
-const CACHE_NAME = 'abrantes-calc-v1';
+const CACHE_NAME = 'abrantes-calc-v2';
 
 const CORE_ASSETS = [
     './',
@@ -52,7 +52,9 @@ self.addEventListener('fetch', (event) => {
                 return response;
             })
             .catch(() => {
-                return caches.match(request);
+                return caches.match(request).then((cached) => {
+                    return cached || new Response('', { status: 503, statusText: 'Offline' });
+                });
             })
     );
 });
