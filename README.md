@@ -47,6 +47,7 @@ Small sample sizes produce unreliable results. As a general rule:
 - Works entirely in the browser — no data is sent to any server
 - Responsive design for desktop and mobile
 - Works offline — a service worker caches all assets so both tools remain fully functional without an internet connection
+- Print-friendly — use your browser's Print or "Save as PDF" to export a clean A4 report
 
 ### Statistical method
 
@@ -103,6 +104,7 @@ Static site — no dependencies, no build step:
 - `planner.html` / `planner.js` — Test Planner
 - `style.css` — shared styling
 - `planner.css` — planner-specific styling
+- `print.css` — print/PDF stylesheet (A4 layout, shared by both pages)
 - `service-worker.js` — network-first caching for offline support
 - `manifest.json` — web app manifest for installability
 

@@ -1,0 +1,292 @@
+/* Print stylesheet – A4 single-page report for Calculator & Planner */
+@page {
+    size: A4;
+    margin: 18mm 15mm;
+}
+
+/* ===== Base reset for print ===== */
+* {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    color-adjust: exact !important;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    color: #1e293b;
+    background: #fff !important;
+    line-height: 1.5;
+    font-size: 11pt;
+    margin: 0;
+    padding: 0;
+}
+
+/* ===== Hide interactive / non-printable elements ===== */
+.header,
+.actions,
+.btn,
+.btn-remove,
+.nav-link,
+.hero-subtitle,
+#add-variant-btn,
+#share-btn {
+    display: none !important;
+}
+
+/* ===== Container ===== */
+.container {
+    max-width: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+/* ===== Hero – compact header for the printed page ===== */
+.hero {
+    padding: 0 0 6mm;
+    text-align: left;
+    border-bottom: 0.5pt solid #cbd5e1;
+    margin-bottom: 5mm;
+}
+
+.hero h1 {
+    font-size: 18pt;
+    font-weight: 700;
+    color: #0f172a;
+    margin: 0;
+}
+
+/* ===== Cards ===== */
+.card {
+    border: 0.5pt solid #e2e8f0;
+    border-radius: 3mm;
+    padding: 4mm 5mm;
+    margin-bottom: 4mm;
+    box-shadow: none;
+    page-break-inside: avoid;
+    break-inside: avoid;
+}
+
+/* ===== Experiment title card ===== */
+.experiment-title-card {
+    margin-bottom: 4mm;
+}
+
+.title-row {
+    display: flex;
+    align-items: baseline;
+    gap: 8mm;
+}
+
+.title-field {
+    flex: 1;
+}
+
+.confidence-toggle-group {
+    flex-shrink: 0;
+}
+
+/* Show the input values as plain text */
+.input-label {
+    font-size: 7pt;
+    font-weight: 600;
+    color: #64748b;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 1mm;
+    display: block;
+}
+
+.input {
+    border: none;
+    background: transparent;
+    padding: 0;
+    font-size: 11pt;
+    color: #0f172a;
+    font-weight: 600;
+    width: 100%;
+}
+
+/* Confidence toggle – show only the active button */
+.confidence-toggle {
+    border: none;
+    display: inline;
+}
+
+.toggle-option {
+    display: none;
+}
+
+.toggle-option.active {
+    display: inline;
+    background: none !important;
+    border: none;
+    color: #0f172a !important;
+    font-size: 11pt;
+    font-weight: 600;
+    padding: 0;
+}
+
+/* ===== Variant cards ===== */
+.variant-card {
+    margin-bottom: 4mm;
+}
+
+.variant-header {
+    margin-bottom: 2mm;
+}
+
+.variant-title {
+    font-size: 11pt;
+    font-weight: 700;
+    color: #0f172a;
+}
+
+.inputs-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3mm;
+}
+
+/* Planner 3-col grid */
+.inputs-grid-3 {
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+/* ===== Results ===== */
+.results-area {
+    margin-top: 3mm;
+}
+
+.results-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+    gap: 2mm;
+}
+
+.result-item {
+    padding: 2mm 3mm;
+    background: #f8fafc !important;
+    border-radius: 2mm;
+    text-align: center;
+}
+
+.result-label {
+    font-size: 6.5pt;
+    font-weight: 600;
+    color: #64748b;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 1mm;
+}
+
+.result-value {
+    font-size: 13pt;
+    font-weight: 700;
+    color: #0f172a;
+}
+
+.result-value.positive {
+    color: #16a34a !important;
+}
+
+.result-value.negative {
+    color: #dc2626 !important;
+}
+
+/* Badges */
+.badge {
+    font-size: 8pt;
+    padding: 1mm 3mm;
+    border-radius: 999px;
+}
+
+.badge-significant {
+    background: #dcfce7 !important;
+    color: #16a34a !important;
+}
+
+.badge-not-significant {
+    background: #fef3c7 !important;
+    color: #d97706 !important;
+}
+
+/* Warnings / notes */
+.low-data-warning,
+.planner-note,
+.planner-note-warning {
+    font-size: 8pt;
+    padding: 2mm 3mm;
+    border-radius: 2mm;
+    margin-top: 3mm;
+}
+
+.low-data-warning {
+    background: #fef3c7 !important;
+    border-color: #fde68a !important;
+    color: #92400e !important;
+}
+
+.planner-note {
+    background: #f0f9ff !important;
+    border-color: #bae6fd !important;
+    color: #0c4a6e !important;
+}
+
+.planner-note-warning {
+    background: #fef3c7 !important;
+    border-color: #fde68a !important;
+    color: #92400e !important;
+}
+
+/* ===== Planner results card ===== */
+.planner-results-card {
+    page-break-inside: avoid;
+    break-inside: avoid;
+}
+
+.planner-results-card .variant-title {
+    margin-bottom: 3mm;
+}
+
+.planner-results-grid {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+/* ===== Footer – compact credit line ===== */
+.footer {
+    border-top: 0.5pt solid #cbd5e1;
+    margin-top: 6mm;
+    padding-top: 3mm;
+    font-size: 7pt;
+    color: #94a3b8;
+    text-align: center;
+}
+
+.footer a {
+    color: #94a3b8;
+    text-decoration: none;
+}
+
+/* ===== Links – no underlines, no colours in print ===== */
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+/* ===== Prevent page breaks inside key elements ===== */
+.variant-card,
+.experiment-title-card,
+.planner-inputs-card,
+.planner-results-card,
+.result-item {
+    page-break-inside: avoid;
+    break-inside: avoid;
+}
+
+/* ===== Select elements (planner) – show value cleanly ===== */
+select.input {
+    -webkit-appearance: none;
+    appearance: none;
+    border: none;
+    background: transparent;
+}
